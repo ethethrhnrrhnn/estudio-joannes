@@ -1,0 +1,31 @@
+---
+import Logo from './Logo.astro';
+import { site } from '../data/shop';
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="wrap grid">
+    <Logo size={22} wordmark={false} />
+    <div>
+      <p>Objects in concrete, made by hand in {site.city}.</p>
+      <p class="muted">© {year} {site.name}</p>
+    </div>
+    <ul>
+      <li><a class="u" href="/shop">Shop</a></li>
+      <li><a class="u" href="/studio">Studio</a></li>
+      <li><a class="u" href="/contact">Contact</a></li>
+    </ul>
+    <ul>
+      <li><a class="u" href={site.instagram} rel="noopener">Instagram</a></li>
+      <li><a class="u" href={`mailto:${site.email}`}>{site.email}</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  footer { border-top: 1px solid var(--line); margin-top: clamp(64px, 10vw, 140px); padding: 40px 0 56px; font-size: var(--t-s); }
+  .grid { display: grid; grid-template-columns: 60px 2fr 1fr 1.4fr; gap: 24px; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; align-content: start; }
+  p { margin-bottom: 6px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: 1fr 1fr; } .grid > :first-child { grid-column: 1 / -1; } .grid > div { grid-column: 1 / -1; } }
+</style>

@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import Placeholder from '../components/Placeholder.astro';
+import { products, categories, formatPrice } from '../data/products';
+const first = products[0];
+const steps = [
+  { t: 'Master', d: 'The form is modelled in CAD and 3D printed as a master.' },
+  { t: 'Mould', d: 'Silicone is poured around the master, inside a printed mould box.' },
+  { t: 'Cast', d: 'Concrete is mixed, poured and vibrated to bring the air out.' },
+  { t: 'Cure', d: 'Each piece cures slowly, then is demoulded, sanded and sealed.' },
+];
+---
+<Base darkHeader>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <h1>Objects in concrete,<br />made by hand in Madrid.</h1>
+      <div class="hero-actions">
+        <a class="btn on-dark" href="/shop">Shop objects</a>
+      </div>
+    </div>
+    <svg class="drip d1" viewBox="14 199 54 40" aria-hidden="true"><path d="M 14 199 L 14 200 C 22 200 26 206 26 216 C 26 228 32 238 42 238 C 52 238 58 228 58 214 C 58 206 60 200 68 200 L 68 199 Z" /></svg>
+    <svg class="drip d2" viewBox="102 199 56 88" aria-hidden="true"><path d="M 102 199 L 102 200 C 112 200 114 210 114 222 C 114 236 108 246 108 260 C 108 276 118 286 130 286 C 142 286 152 276 152 260 C 152 246 146 236 146 222 C 146 210 148 200 158 200 L 158 199 Z" /></svg>
+  </section>
+
+  <section class="feature wrap">
+    <a class="feature-img" href={`/shop/${first.slug}`}>
+      {first.images[0] ? <img src={first.images[0]} alt={first.name} /> : <Placeholder />}
+    </a>
+    <div class="feature-text">
+      <p class="muted">The first object</p>
+      <h2>{first.name}</h2>
+      <p>{first.summary}</p>
+      <p class="price">{formatPrice(first.price)}</p>
+      <a class="btn" href={`/shop/${first.slug}`}>See the ashtray</a>
+    </div>
+  </section>
+
+  <section class="cats wrap" aria-labelledby="cats-h">
+    <h2 id="cats-h">Objects</h2>
+    <ul>
+      {categories.map((c) => (
+        <li class:list={{ off: !c.available }}>
+          {c.available ? <a href={`/shop#${c.slug}`}>{c.name}</a> : <span>{c.name}</span>}
+          <span class="muted">{c.available ? `${products.filter((p) => p.category === c.slug).length} object` : 'In development'}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="process wrap" aria-labelledby="proc-h">
+    <h2 id="proc-h">How each piece is made</h2>
+    <ol>
+      {steps.map((s, i) => (
+        <li><span class="n">{i + 1}</span><h3>{s.t}</h3><p class="muted">{s.d}</p></li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="studio wrap">
+    <p class="lede">Estudio Joannes is a small design studio making home objects the way an industrial designer would: drawn, prototyped and tested, then made in small batches.</p>
+    <a class="u" href="/studio">About the studio</a>
+  </section>
+</Base>
+
+<style>
+  .hero { --k: 0.4; position: relative; background: var(--basalt); color: var(--paper); }
+  .hero-inner { min-height: min(72vh, 720px); display: flex; flex-direction: column; justify-content: flex-end; padding-top: 80px; padding-bottom: clamp(40px, 6vw, 80px); }
+  h1 { font-size: var(--t-xxl); letter-spacing: -0.035em; line-height: 1.02; max-width: 17ch; }
+  .hero-actions { margin-top: 36px; }
+
+  /* the drips: sized from the logo, k = scale of the logo square to page width */
+  .drip { position: absolute; top: 100%; fill: var(--basalt); transform-origin: top; animation: drip 1.6s cubic-bezier(.6, 0, .2, 1) both; }
+  .d1 { left: 7%; width: calc(54 / 200 * var(--k) * 100vw); }
+  .d2 { left: 51%; width: calc(56 / 200 * var(--k) * 100vw); animation-duration: 2.4s; animation-delay: .2s; }
+  @keyframes drip { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+
+  .feature { --k: 0.4; display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
+  .feature-img { padding-top: calc(40 / 200 * var(--k) * 100vw + 32px); padding-right: 8%; }
+  .feature-img img { aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .feature-text { padding-top: calc(88 / 200 * var(--k) * 100vw + 32px); padding-left: 4%; align-self: start; }
+  .feature-text h2 { font-size: var(--t-xl); margin: 6px 0 16px; }
+  .price { font-size: var(--t-l); margin: 20px 0 24px; }
+
+  section.cats, section.process, section.studio { margin-top: clamp(80px, 11vw, 160px); }
+  .cats h2, .process h2 { font-size: var(--t-xl); margin-bottom: 28px; }
+  .cats ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+  .cats li { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: var(--t-l); }
+  .cats li .muted { font-size: var(--t-s); }
+  .cats li.off > span:first-child { color: var(--mute); }
+  .cats a:hover { text-decoration: underline; text-underline-offset: .2em; }
+
+  .process ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gutter); }
+  .process li { border-top: 1px solid var(--ink); padding-top: 16px; }
+  .process .n { font-size: var(--t-s); color: var(--mute); }
+  .process h3 { font-size: var(--t-l); margin: 28px 0 8px; }
+
+  .lede { font-size: var(--t-xl); line-height: 1.25; letter-spacing: -0.02em; max-width: 30ch; }
+
+  @media (max-width: 820px) {
+    .feature { grid-template-columns: 1fr; }
+    .feature-img { padding-right: 0; padding-top: calc(88 / 200 * var(--k) * 100vw + 24px); }
+    .feature-text { padding: 32px 0 0; }
+    .process ol { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+  }
+</style>

@@ -1,0 +1,62 @@
+/* Estudio Joannes — tokens from the logo file in Figma */
+:root {
+  --paper: #e9e6e1;   /* raw concrete */
+  --stone: #d6d2cb;   /* placeholder fields, hover */
+  --line: #c3beb6;    /* hairlines */
+  --mute: #73706b;    /* secondary text */
+  --ink: #1a1a1a;     /* text, logo */
+  --basalt: #171717;  /* the dark block */
+
+  --sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, monospace;
+
+  /* type scale, ratio 1.25 from 16px */
+  --t-s: 0.8rem;
+  --t-m: 1rem;
+  --t-l: 1.25rem;
+  --t-xl: 1.953rem;
+  --t-xxl: clamp(2.4rem, 6vw, 4.77rem);
+
+  --gutter: clamp(16px, 3vw, 40px);
+  --max: 1440px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--t-m)/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+p { margin: 0 0 1em; max-width: 62ch; }
+h1, h2, h3 { margin: 0; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+button { font: inherit; color: inherit; }
+
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.muted { color: var(--mute); }
+.u { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+.u:hover { text-decoration-thickness: 2px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 48px; padding: 0 1.5em;
+  background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: 0;
+  font-weight: 500; cursor: pointer;
+}
+.btn:hover { background: transparent; color: var(--ink); }
+.btn.on-dark { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.btn.on-dark:hover { background: transparent; color: var(--paper); }
+.btn[disabled] { background: transparent; color: var(--mute); border-color: var(--line); cursor: default; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

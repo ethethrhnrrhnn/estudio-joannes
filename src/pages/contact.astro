@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/shop';
+---
+<Base title="Contact">
+  <div class="wrap contact">
+    <h1>Contact</h1>
+    <dl>
+      <div><dt>Email</dt><dd><a class="u" href={`mailto:${site.email}`}>{site.email}</a></dd></div>
+      <div><dt>Instagram</dt><dd><a class="u" href={site.instagram} rel="noopener">Follow the studio</a></dd></div>
+      <div><dt>Studio</dt><dd>{site.city}, Spain</dd></div>
+      <div><dt>Trade and commissions</dt><dd>Shops, interior designers and custom pieces: write by email.</dd></div>
+    </dl>
+  </div>
+</Base>
+
+<style>
+  .contact { padding-top: clamp(40px, 8vw, 120px); max-width: 900px; margin-left: 0; }
+  h1 { font-size: var(--t-xxl); letter-spacing: -0.035em; margin-bottom: 48px; }
+  dl { margin: 0; border-top: 1px solid var(--ink); }
+  dl div { display: grid; grid-template-columns: 14em 1fr; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: var(--t-l); }
+  dt { color: var(--mute); font-size: var(--t-m); padding-top: 3px; }
+  dd { margin: 0; }
+  @media (max-width: 640px) { dl div { grid-template-columns: 1fr; gap: 4px; } }
+</style>

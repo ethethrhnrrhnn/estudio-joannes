@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { products, categories } from '../../data/products';
+---
+<Base title="Shop" description="Concrete objects for the home, made in small batches in Madrid.">
+  <div class="wrap shop">
+    <aside>
+      <h1>Shop</h1>
+      <nav aria-label="Categories">
+        <ul>
+          {categories.map((c) => (
+            <li><a href={`#${c.slug}`} class:list={{ off: !c.available }}>{c.name}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+    <div class="cols">
+      {categories.map((c) => {
+        const items = products.filter((p) => p.category === c.slug);
+        return (
+          <section id={c.slug} class="cat">
+            <header>
+              <h2>{c.name}</h2>
+              <span class="muted">{items.length ? `${items.length} ${items.length === 1 ? 'object' : 'objects'}` : 'In development'}</span>
+            </header>
+            {items.length ? (
+              <div class="grid">{items.map((p) => <ProductCard product={p} />)}</div>
+            ) : (
+              <p class="muted empty">Nothing here yet. New objects are announced on Instagram first.</p>
+            )}
+          </section>
+        );
+      })}
+    </div>
+  </div>
+</Base>
+
+<style>
+  .shop { display: grid; grid-template-columns: 220px 1fr; gap: var(--gutter); padding-top: 40px; }
+  aside { position: sticky; top: 24px; align-self: start; }
+  h1 { font-size: var(--t-xl); margin-bottom: 24px; }
+  aside ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  aside a:hover { text-decoration: underline; text-underline-offset: .2em; }
+  aside a.off { color: var(--mute); }
+  .cat { scroll-margin-top: 24px; margin-bottom: 64px; }
+  .cat header { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--ink); padding-top: 12px; margin-bottom: 24px; }
+  .cat h2 { font-size: var(--t-l); }
+  .cat header .muted { font-size: var(--t-s); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 40px var(--gutter); }
+  .empty { font-size: var(--t-s); }
+  @media (max-width: 720px) {
+    .shop { grid-template-columns: 1fr; padding-top: 24px; }
+    aside { position: static; }
+    aside ul { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  }
+</style>

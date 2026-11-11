@@ -1,0 +1,58 @@
+---
+import { shopify, shopReady, site } from '../data/shop';
+import type { Product } from '../data/products';
+interface Props { product: Product }
+const { product } = Astro.props;
+const live = shopReady() && product.shopifyId;
+---
+{live ? (
+  <div class="buy" data-buy data-id={product.shopifyId} data-domain={shopify.domain} data-token={shopify.storefrontAccessToken}></div>
+) : (
+  <div class="buy-soon">
+    <button class="btn" disabled>Not yet on sale</button>
+    <p class="muted">The first batch is curing. <a class="u" href={site.instagram} rel="noopener">Follow on Instagram</a> or <a class="u" href={`mailto:${site.email}?subject=${encodeURIComponent(product.name)}`}>email to reserve one</a>.</p>
+  </div>
+)}
+
+<script>
+  // Loads Shopify's Buy Button SDK only on pages that have a live product.
+  const nodes = document.querySelectorAll<HTMLElement>('[data-buy]');
+  if (nodes.length) {
+    const SRC = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+    const start = () => {
+      const S = (window as any).ShopifyBuy;
+      nodes.forEach((node) => {
+        const client = S.buildClient({ domain: node.dataset.domain, storefrontAccessToken: node.dataset.token });
+        S.UI.onReady(client).then((ui: any) => {
+          const font = { 'font-family': 'Geist, sans-serif' };
+          const button = {
+            ...font, 'font-weight': '500', 'border-radius': '0', 'background-color': '#1a1a1a', color: '#e9e6e1',
+            ':hover': { 'background-color': '#000' }, ':focus': { 'background-color': '#000' }, padding: '16px 28px',
+          };
+          ui.createComponent('product', {
+            id: node.dataset.id,
+            node,
+            moneyFormat: '{{amount_with_comma_separator}} €',
+            options: {
+              product: {
+                contents: { img: false, title: false, price: true, options: true },
+                text: { button: 'Add to bag' },
+                styles: { product: { 'text-align': 'left', ...font }, button, price: { ...font, 'font-size': '20px' } },
+              },
+              cart: { text: { title: 'Bag', total: 'Total', button: 'Checkout' }, styles: { button, ...{} } },
+              toggle: { styles: { toggle: { ...font, 'background-color': '#1a1a1a', ':hover': { 'background-color': '#000' } } } },
+            },
+          });
+        });
+      });
+    };
+    const s = document.createElement('script');
+    s.async = true; s.src = SRC; s.onload = start;
+    document.head.appendChild(s);
+  }
+</script>
+
+<style>
+  .buy-soon p { margin-top: 14px; font-size: var(--t-s); }
+  .buy { min-height: 96px; }
+</style>

@@ -1,0 +1,29 @@
+---
+// Drawn stand-in until real photos go in /public/images.
+interface Props { label?: string; tone?: 'stone' | 'basalt' }
+const { label = 'Photo to come', tone = 'stone' } = Astro.props;
+---
+<figure class:list={['ph', tone]}>
+  <svg viewBox="0 0 400 300" role="img" aria-label={`${label}: drawing of the volcanic ashtray`}>
+    <ellipse cx="200" cy="232" rx="150" ry="18" class="shadow" />
+    <path d="M70 226 L140 104 Q200 92 260 104 L330 226 Q200 252 70 226 Z" class="body" />
+    <ellipse cx="200" cy="106" rx="60" ry="12" class="crater" />
+    <path d="M146 106 Q200 132 254 106" class="rim" />
+  </svg>
+  <figcaption>{label}</figcaption>
+</figure>
+
+<style>
+  .ph { margin: 0; position: relative; aspect-ratio: 4 / 5; background: var(--stone); display: grid; place-items: center; overflow: hidden; }
+  .ph svg { width: 72%; }
+  .body { fill: #a8a39b; }
+  .crater { fill: #6e6a64; }
+  .rim { fill: none; stroke: #8b867f; stroke-width: 2; }
+  .shadow { fill: rgba(0, 0, 0, 0.08); }
+  figcaption { position: absolute; left: 14px; bottom: 12px; font-size: var(--t-s); color: var(--mute); }
+  .basalt { background: #2a2a29; }
+  .basalt .body { fill: #4a4946; }
+  .basalt .crater { fill: #1e1e1d; }
+  .basalt .rim { stroke: #3a3937; }
+  .basalt figcaption { color: #9b978f; }
+</style>

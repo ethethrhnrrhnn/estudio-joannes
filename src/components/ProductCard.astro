@@ -1,0 +1,20 @@
+---
+import Placeholder from './Placeholder.astro';
+import { formatPrice, type Product } from '../data/products';
+interface Props { product: Product }
+const { product: p } = Astro.props;
+---
+<a class="card" href={`/shop/${p.slug}`}>
+  {p.images[0] ? <img src={p.images[0]} alt={p.name} loading="lazy" /> : <Placeholder />}
+  <span class="name">{p.name}</span>
+  <span class="muted">{p.material}</span>
+  <span class="price">{formatPrice(p.price)}</span>
+</a>
+
+<style>
+  .card { display: grid; gap: 2px; }
+  .card :global(.ph), .card img { margin-bottom: 12px; aspect-ratio: 4 / 5; object-fit: cover; width: 100%; }
+  .name { font-weight: 500; }
+  .price { margin-top: 6px; }
+  .card:hover .name { text-decoration: underline; text-underline-offset: 0.2em; }
+</style>

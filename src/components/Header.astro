@@ -1,0 +1,30 @@
+---
+import Logo from './Logo.astro';
+interface Props { dark?: boolean }
+const { dark = false } = Astro.props;
+const path = Astro.url.pathname;
+const links = [
+  { href: '/shop', label: 'Shop' },
+  { href: '/studio', label: 'Studio' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+<header class:list={['site-header', { dark }]}>
+  <div class="wrap bar">
+    <a href="/" aria-label="Estudio Joannes, home"><Logo size={26} /></a>
+    <nav aria-label="Main">
+      {links.map((l) => (
+        <a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header { color: var(--ink); }
+  .site-header.dark { color: var(--paper); background: var(--basalt); }
+  .bar { display: flex; justify-content: space-between; align-items: flex-start; padding-top: 22px; padding-bottom: 22px; }
+  nav { display: flex; gap: clamp(16px, 3vw, 36px); padding-top: 4px; }
+  nav a { font-weight: 500; padding: 4px 0; border-bottom: 1px solid transparent; }
+  nav a:hover, nav a[aria-current='page'] { border-bottom-color: currentColor; }
+</style>

@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Studio" description="A small design studio in Madrid making home objects in concrete.">
+  <article class="wrap studio">
+    <h1>A design studio that makes its own objects.</h1>
+    <div class="body">
+      <p>Estudio Joannes designs and makes objects for the home. Each one is approached like an industrial design project: sketched, modelled in CAD, 3D printed as a prototype, then refined until it is right to make.</p>
+      <p>Everything is produced in the studio in Madrid. The moulds are made in house from printed masters, and each piece is cast, cured and finished by hand, in small batches.</p>
+      <p>Concrete is the starting material. It is heavy, cheap, honest and never comes out of the mould the same way twice.</p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .studio { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); padding-top: clamp(40px, 8vw, 120px); }
+  h1 { font-size: var(--t-xxl); letter-spacing: -0.035em; max-width: 12ch; }
+  .body { font-size: var(--t-l); line-height: 1.45; padding-top: 12px; }
+  @media (max-width: 820px) { .studio { grid-template-columns: 1fr; } }
+</style>
