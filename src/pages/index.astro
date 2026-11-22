@@ -18,8 +18,10 @@ const steps = [
         <a class="btn on-dark" href="/shop">Shop objects</a>
       </div>
     </div>
-    <div class="drip d1" aria-hidden="true"><video src="/video/ashtray-drips.mp4" muted loop playsinline preload="auto"></video></div>
-    <div class="drip d2" aria-hidden="true"><video src="/video/ashtray-drips.mp4" muted loop playsinline preload="auto"></video></div>
+    <div class="hero-media" aria-hidden="true">
+      <video src="/video/ashtray-drips.mp4" autoplay muted loop playsinline preload="auto"></video>
+    </div>
+    <div class="hero-shade" aria-hidden="true"></div>
   </section>
 
   <section class="feature wrap">
@@ -68,17 +70,28 @@ const steps = [
   h1 { font-size: var(--t-xxl); letter-spacing: -0.035em; line-height: 1.02; max-width: 17ch; }
   .hero-actions { margin-top: 36px; }
 
-  /* the drips: sized from the logo, k = scale of the logo square to page width.
-     Each drip is a window (mask in the shape of the logo drip) onto the ashtray video. */
-  .drip { position: absolute; top: calc(100% - 0.5px); background: var(--basalt); overflow: hidden;
-    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: top; mask-position: top;
-    animation: drip 1.6s cubic-bezier(.6, 0, .2, 1) both; }
-  .drip video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
-  .d1 { left: 7%; width: calc(54 / 200 * var(--k) * 100vw); aspect-ratio: 54 / 39;
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='14 200 54 39' preserveAspectRatio='none'%3E%3Cpath d='M 14 200 C 22 200 26 206 26 216 C 26 228 32 238 42 238 C 52 238 58 228 58 214 C 58 206 60 200 68 200 Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='14 200 54 39' preserveAspectRatio='none'%3E%3Cpath d='M 14 200 C 22 200 26 206 26 216 C 26 228 32 238 42 238 C 52 238 58 228 58 214 C 58 206 60 200 68 200 Z'/%3E%3C/svg%3E"); }
-  .d2 { left: 51%; width: calc(56 / 200 * var(--k) * 100vw); aspect-ratio: 56 / 87; animation-duration: 2.4s; animation-delay: .2s;
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='102 200 56 87' preserveAspectRatio='none'%3E%3Cpath d='M 102 200 C 112 200 114 210 114 222 C 114 236 108 246 108 260 C 108 276 118 286 130 286 C 142 286 152 276 152 260 C 152 246 146 236 146 222 C 146 210 148 200 158 200 Z'/%3E%3C/svg%3E"); mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='102 200 56 87' preserveAspectRatio='none'%3E%3Cpath d='M 102 200 C 112 200 114 210 114 222 C 114 236 108 246 108 260 C 108 276 118 286 130 286 C 142 286 152 276 152 260 C 152 246 146 236 146 222 C 146 210 148 200 158 200 Z'/%3E%3C/svg%3E"); }
-  @keyframes drip { from { -webkit-mask-size: 100% 0%; mask-size: 100% 0%; } to { -webkit-mask-size: 100% 100%; mask-size: 100% 100%; } }
+  /* One video covers the whole black block and carries on through the two drips.
+     --u is one logo unit on screen (k = scale of the logo square to page width). The media box is the
+     hero plus the longest drip (87 units); its mask is the hero rectangle plus the two logo drips,
+     which grow downward from the hero's bottom edge (--g1 / --g2 go 0 to 1). */
+  @property --g1 { syntax: '<number>'; inherits: false; initial-value: 0; }
+  @property --g2 { syntax: '<number>'; inherits: false; initial-value: 0; }
+  .hero { --u: calc(var(--k) * 100vw / 200); }
+  .hero-media { position: absolute; left: 0; top: 0; width: 100%; height: calc(100% + 87 * var(--u)); pointer-events: none;
+    background: var(--basalt);
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(#000, #000), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='14 200 54 39' preserveAspectRatio='none'%3E%3Cpath d='M 14 200 C 22 200 26 206 26 216 C 26 228 32 238 42 238 C 52 238 58 228 58 214 C 58 206 60 200 68 200 Z'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='102 200 56 87' preserveAspectRatio='none'%3E%3Cpath d='M 102 200 C 112 200 114 210 114 222 C 114 236 108 246 108 260 C 108 276 118 286 130 286 C 142 286 152 276 152 260 C 152 246 146 236 146 222 C 146 210 148 200 158 200 Z'/%3E%3C/svg%3E");
+    mask-image: linear-gradient(#000, #000), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='14 200 54 39' preserveAspectRatio='none'%3E%3Cpath d='M 14 200 C 22 200 26 206 26 216 C 26 228 32 238 42 238 C 52 238 58 228 58 214 C 58 206 60 200 68 200 Z'/%3E%3C/svg%3E"), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='102 200 56 87' preserveAspectRatio='none'%3E%3Cpath d='M 102 200 C 112 200 114 210 114 222 C 114 236 108 246 108 260 C 108 276 118 286 130 286 C 142 286 152 276 152 260 C 152 246 146 236 146 222 C 146 210 148 200 158 200 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% calc(100% - 87 * var(--u) + 0.5px), calc(54 * var(--u)) calc(39 * var(--u) * var(--g1)), calc(56 * var(--u)) calc(87 * var(--u) * var(--g2));
+    mask-size: 100% calc(100% - 87 * var(--u) + 0.5px), calc(54 * var(--u)) calc(39 * var(--u) * var(--g1)), calc(56 * var(--u)) calc(87 * var(--u) * var(--g2));
+    -webkit-mask-position: left 0 top 0, left calc(7 * 1vw) bottom calc((87 - 39 * var(--g1)) * var(--u)), left calc(51 * 1vw) bottom calc((87 - 87 * var(--g2)) * var(--u));
+    mask-position: left 0 top 0, left calc(7 * 1vw) bottom calc((87 - 39 * var(--g1)) * var(--u)), left calc(51 * 1vw) bottom calc((87 - 87 * var(--g2)) * var(--u));
+    animation: drip1 1.6s cubic-bezier(.6, 0, .2, 1) both, drip2 2.4s .2s cubic-bezier(.6, 0, .2, 1) both; }
+  .hero-media video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05) brightness(.8); }
+  .hero-shade { position: absolute; inset: 0; background: rgba(23, 23, 23, .5); pointer-events: none; }
+  .hero-inner { position: relative; z-index: 2; }
+  @keyframes drip1 { from { --g1: 0; } to { --g1: 1; } }
+  @keyframes drip2 { from { --g2: 0; } to { --g2: 1; } }
 
   .feature { --k: 0.4; display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
   .feature-img { padding-top: calc(40 / 200 * var(--k) * 100vw + 32px); padding-right: 8%; }
@@ -109,11 +122,3 @@ const steps = [
     .process ol { grid-template-columns: 1fr 1fr; row-gap: 40px; }
   }
 </style>
-
-<script>
-  // both drips show the same clip: start them together so they stay in step
-  const vids = Array.from(document.querySelectorAll<HTMLVideoElement>('.drip video'));
-  Promise.all(vids.map((v) => (v.readyState >= 3 ? 0 : new Promise((r) => v.addEventListener('canplay', r, { once: true }))))).then(() => {
-    vids.forEach((v) => { v.currentTime = 0; v.play().catch(() => {}); });
-  });
-</script>
