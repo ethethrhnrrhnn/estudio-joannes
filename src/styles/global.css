@@ -1,4 +1,4 @@
-/* Estudio Joannes — tokens from the logo file in Figma */
+/* Dripsquare — tokens from the logo file in Figma */
 :root {
   --paper: #e9e6e1;   /* raw concrete */
   --stone: #d6d2cb;   /* placeholder fields, hover */
@@ -8,7 +8,7 @@
   --basalt: #171717;  /* the dark block */
 
   --sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
-  --mono: 'Geist Mono', ui-monospace, monospace;
+  --brand: 'Montserrat', 'Gotham', 'Avenir Next', ui-sans-serif, system-ui, sans-serif; /* DRIPSQUARE wordmark: thin geometric caps */
 
   /* type scale, ratio 1.25 from 16px */
   --t-s: 0.8rem;

@@ -11,7 +11,7 @@ export const shopify = {
 export const shopReady = () => Boolean(shopify.domain && shopify.storefrontAccessToken);
 
 export const site = {
-  name: 'Estudio Joannes',
+  name: 'Dripsquare',
   city: 'Madrid',
   email: 'hola@estudiojoannes.com', // set up this inbox on estudiojoannes.com
   instagram: 'https://instagram.com/', // TODO: handle

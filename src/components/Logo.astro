@@ -1,6 +1,6 @@
 ---
 import { DRIP_PATH } from '../data/brand';
-// Two-drips melting square + two-tier wordmark (ESTUDIO / Joannes), as set in Figma.
+// Two-drips melting square + the DRIPSQUARE wordmark (thin geometric caps).
 interface Props { size?: number; wordmark?: boolean; class?: string }
 const { size = 28, wordmark = true, class: cls = '' } = Astro.props;
 ---
@@ -10,15 +10,13 @@ const { size = 28, wordmark = true, class: cls = '' } = Astro.props;
   </svg>
   {wordmark && (
     <span class="words">
-      <span class="estudio">ESTUDIO</span>
-      <span class="joannes">Joannes</span>
+      <span class="brand">DRIPSQUARE</span>
     </span>
   )}
 </span>
 
 <style>
-  .logo { display: inline-flex; align-items: flex-start; gap: calc(var(--s) * 0.42); }
-  .words { display: flex; flex-direction: column; line-height: 1; margin-top: -0.04em; }
-  .estudio { font-family: var(--mono); font-size: calc(var(--s) * 0.27); letter-spacing: 0.34em; margin-bottom: calc(var(--s) * 0.08); }
-  .joannes { font-family: var(--sans); font-weight: 500; font-size: calc(var(--s) * 1.1); letter-spacing: -0.03em; }
+  .logo { display: inline-flex; align-items: center; gap: calc(var(--s) * 0.5); }
+  .words { display: flex; align-self: center; line-height: 1; }
+  .brand { font-family: var(--brand); font-weight: 300; font-size: calc(var(--s) * 0.78); letter-spacing: 0.08em; }
 </style>

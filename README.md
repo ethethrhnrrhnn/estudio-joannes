@@ -1,6 +1,6 @@
-# Estudio Joannes
+# Dripsquare
 
-Shop site for Estudio Joannes. Astro, deployed on Vercel, checkout through Shopify Buy Button.
+Shop site for Dripsquare. Astro, deployed on Vercel, checkout through Shopify Buy Button.
 
 ## Run it
 
