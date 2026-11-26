@@ -45,7 +45,7 @@ export const products: Product[] = [
     ],
     care: 'Límpialo con un paño húmedo. El hormigón está sellado, pero irá cogiendo pátina con el uso.',
     shopifyId: null,
-    images: ['/images/ashtray-1.webp'],
+    images: ['/images/hero-1.jpg'],
   },
   {
     slug: 'twist-lamp', // TODO: confirm the name
@@ -62,7 +62,7 @@ export const products: Product[] = [
     ],
     care: 'Límpiala con un paño seco o ligeramente húmedo. Mantenla alejada del calor directo.',
     shopifyId: null,
-    images: ['/images/twist-lamp-1.jpg'],
+    images: ['/images/hero-2.jpg'],
   },
 ];
 
