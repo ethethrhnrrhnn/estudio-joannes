@@ -22,7 +22,8 @@ const steps = [
       </div>
     </div>
     <div class="hero-media" aria-hidden="true">
-      <video src="/video/ashtray-drips.mp4" autoplay muted loop playsinline preload="auto"></video>
+      <img class="slide" src="/images/hero-1.jpg" alt="Cenicero de hormigón sobre una mesa metálica" />
+      <img class="slide s2" src="/images/hero-2.jpg" alt="Lámpara Twist encendida" />
     </div>
   </section>
 
@@ -97,7 +98,9 @@ const steps = [
     -webkit-mask-position: left 0 top 0, left calc(7 * 1vw) bottom calc((87 - 39 * var(--g1)) * var(--u)), left calc(51 * 1vw) bottom calc((87 - 87 * var(--g2)) * var(--u));
     mask-position: left 0 top 0, left calc(7 * 1vw) bottom calc((87 - 39 * var(--g1)) * var(--u)), left calc(51 * 1vw) bottom calc((87 - 87 * var(--g2)) * var(--u));
     animation: drip1 1.6s cubic-bezier(.6, 0, .2, 1) both, drip2 2.4s .2s cubic-bezier(.6, 0, .2, 1) both; }
-  .hero-media video { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05) brightness(.42); }
+  .hero-media .slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.05) brightness(.42); animation: fade 12s infinite; }
+  .hero-media .s2 { animation-delay: -6s; }
+  @keyframes fade { 0%, 40% { opacity: 1; } 50%, 90% { opacity: 0; } 100% { opacity: 1; } }
   .hero-inner { position: relative; z-index: 2; }
   @keyframes drip1 { from { --g1: 0; } to { --g1: 1; } }
   @keyframes drip2 { from { --g2: 0; } to { --g2: 1; } }
