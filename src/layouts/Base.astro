@@ -25,8 +25,13 @@ const full = title ? `${title} | Estudio Joannes` : 'Estudio Joannes';
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono&display=swap" rel="stylesheet" />
   </head>
   <body>
+    <p class="announce">Designed and made by hand in Madrid</p>
     <Header dark={darkHeader} />
     <main><slot /></main>
     <Footer />
   </body>
 </html>
+
+<style is:global>
+  .announce { margin: 0; max-width: none; background: var(--ink); color: var(--paper); text-align: center; font-size: var(--t-s); padding: 8px var(--gutter); border-bottom: 1px solid rgba(233, 230, 225, .12); }
+</style>

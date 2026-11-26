@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import Placeholder from '../components/Placeholder.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { site } from '../data/shop';
 import { products, categories, formatPrice } from '../data/products';
 const first = products[0];
 const steps = [
@@ -14,8 +16,9 @@ const steps = [
   <section class="hero">
     <div class="wrap hero-inner">
       <h1>Objects in concrete,<br />made by hand in Madrid.</h1>
+      <p class="hero-sub">Designed and made by the studio, in small batches.</p>
       <div class="hero-actions">
-        <a class="btn on-dark" href="/shop">Shop objects</a>
+        <a class="btn on-dark" href="/shop">Shop now</a>
       </div>
     </div>
     <div class="hero-media" aria-hidden="true">
@@ -36,16 +39,17 @@ const steps = [
     </div>
   </section>
 
-  <section class="cats wrap" aria-labelledby="cats-h">
-    <h2 id="cats-h">Objects</h2>
+  <section class="statement wrap">
+    <p class="eyebrow muted">Drawn, prototyped and tested</p>
+    <h2>Concrete for everyday rituals</h2>
+    <p class="muted">Home objects the way an industrial designer would make them, then cast by hand in small batches.</p>
+  </section>
+
+  <section class="grid wrap" aria-label="Objects">
     <ul>
-      {categories.map((c) => (
-        <li class:list={{ off: !c.available }}>
-          {c.available ? <a href={`/shop#${c.slug}`}>{c.name}</a> : <span>{c.name}</span>}
-          <span class="muted">{c.available ? `${products.filter((p) => p.category === c.slug).length} object` : 'In development'}</span>
-        </li>
-      ))}
+      {products.map((p) => <li><ProductCard product={p} /></li>)}
     </ul>
+    <a class="u all" href="/shop">View all objects</a>
   </section>
 
   <section class="process wrap" aria-labelledby="proc-h">
@@ -57,17 +61,24 @@ const steps = [
     </ol>
   </section>
 
-  <section class="studio wrap">
-    <p class="lede">Estudio Joannes is a small design studio making home objects the way an industrial designer would: drawn, prototyped and tested, then made in small batches.</p>
-    <a class="u" href="/studio">About the studio</a>
+  <section class="hello wrap" aria-labelledby="hello-h">
+    <h2 id="hello-h">Hello, what's up?</h2>
+    <form id="hello-form" action="mailto:">
+      <label>Name<input name="name" autocomplete="name" /></label>
+      <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+      <label class="full">Message<textarea name="message" rows="5" required></textarea></label>
+      <button class="btn" type="submit">Send</button>
+    </form>
+    <p class="muted note">Opens your email app with the message ready to send. Or write to <a class="u" href={`mailto:${site.email}`}>{site.email}</a>.</p>
   </section>
 </Base>
 
 <style>
   .hero { --k: 0.4; position: relative; background: var(--basalt); color: var(--paper); }
-  .hero-inner { min-height: min(72vh, 720px); display: flex; flex-direction: column; justify-content: flex-end; padding-top: 80px; padding-bottom: clamp(40px, 6vw, 80px); }
+  .hero-inner { min-height: min(72vh, 720px); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 64px; padding-bottom: clamp(48px, 7vw, 96px); }
   h1 { font-size: var(--t-xxl); letter-spacing: -0.035em; line-height: 1.02; max-width: 17ch; }
-  .hero-actions { margin-top: 36px; }
+  .hero-sub { margin: 20px 0 0; color: var(--paper); opacity: .8; }
+  .hero-actions { margin-top: 32px; }
 
   /* One video covers the whole black block and carries on through the two drips.
      --u is one logo unit on screen (k = scale of the logo square to page width). The media box is the
@@ -98,13 +109,23 @@ const steps = [
   .feature-text h2 { font-size: var(--t-xl); margin: 6px 0 16px; }
   .price { font-size: var(--t-l); margin: 20px 0 24px; }
 
-  section.cats, section.process, section.studio { margin-top: clamp(80px, 11vw, 160px); }
-  .cats h2, .process h2 { font-size: var(--t-xl); margin-bottom: 28px; }
-  .cats ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
-  .cats li { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: var(--t-l); }
-  .cats li .muted { font-size: var(--t-s); }
-  .cats li.off > span:first-child { color: var(--mute); }
-  .cats a:hover { text-decoration: underline; text-underline-offset: .2em; }
+  section.statement, section.grid, section.process, section.hello { margin-top: clamp(80px, 11vw, 160px); }
+  .statement { text-align: center; }
+  .statement h2 { font-size: var(--t-xxl); letter-spacing: -0.035em; max-width: 14ch; margin: 12px auto 20px; }
+  .statement .eyebrow { font-size: var(--t-s); margin-bottom: 0; max-width: none; }
+  .statement p:last-child { margin: 0 auto; }
+  .grid ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gutter); }
+  .grid .all { display: inline-block; margin-top: 32px; }
+  .process h2 { font-size: var(--t-xl); margin-bottom: 28px; }
+  .hello { max-width: 720px; text-align: center; }
+  .hello h2 { font-size: var(--t-xxl); letter-spacing: -0.035em; margin-bottom: 32px; }
+  .hello form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; }
+  .hello label { display: grid; gap: 6px; font-size: var(--t-s); color: var(--mute); }
+  .hello .full, .hello .btn { grid-column: 1 / -1; }
+  .hello input, .hello textarea { font: inherit; font-size: var(--t-m); color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 0; padding: 12px; }
+  .hello input:focus, .hello textarea:focus { outline: none; border-color: var(--ink); }
+  .hello .btn { justify-self: center; }
+  .hello .note { margin: 20px auto 0; font-size: var(--t-s); }
 
   .process ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gutter); }
   .process li { border-top: 1px solid var(--ink); padding-top: 16px; }
@@ -118,5 +139,17 @@ const steps = [
     .feature-img { padding-right: 0; padding-top: calc(88 / 200 * var(--k) * 100vw + 24px); }
     .feature-text { padding: 32px 0 0; }
     .process ol { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+    .grid ul { grid-template-columns: 1fr 1fr; }
+    .hello form { grid-template-columns: 1fr; }
   }
 </style>
+
+<script define:vars={{ to: site.email }}>
+  // no server behind the form yet: it opens the visitor's email app with the message filled in
+  document.getElementById('hello-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const body = `${f.get('message')}\n\n${f.get('name') || ''}\n${f.get('email')}`;
+    location.href = `mailto:${to}?subject=${encodeURIComponent('Message from the website')}&body=${encodeURIComponent(body)}`;
+  });
+</script>
