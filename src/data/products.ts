@@ -34,7 +34,7 @@ export const products: Product[] = [
     slug: 'volcanic-ashtray',
     name: 'Cenicero volcánico',
     category: 'ashtrays',
-    price: 34,
+    price: 43,
     material: 'Hormigón moldeado',
     dimensions: 'Ø 000 × 00 mm', // TODO: real dimensions
     finishes: ['Basalto', 'Ceniza'],
@@ -51,7 +51,7 @@ export const products: Product[] = [
     slug: 'twist-lamp', // TODO: confirm the name
     name: 'Lámpara Twist',
     category: 'lamps',
-    price: 67,
+    price: 76,
     material: 'Impresa en 3D', // TODO: confirm material
     dimensions: 'Ø 000 × 000 mm', // TODO: real dimensions
     finishes: ['Blanco'], // TODO: confirm finishes
