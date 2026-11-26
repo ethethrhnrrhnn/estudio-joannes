@@ -34,7 +34,7 @@ export const products: Product[] = [
     slug: 'volcanic-ashtray',
     name: 'Volcanic ashtray',
     category: 'ashtrays',
-    price: null,
+    price: 34,
     material: 'Cast concrete',
     dimensions: 'Ø 000 × 00 mm', // TODO: real dimensions
     finishes: ['Basalt', 'Ash'],
@@ -45,7 +45,7 @@ export const products: Product[] = [
     ],
     care: 'Wipe with a damp cloth. The concrete is sealed but will patina with use.',
     shopifyId: null,
-    images: [],
+    images: ['/images/ashtray-1.webp'],
   },
   {
     slug: 'twist-lamp', // TODO: confirm the name
