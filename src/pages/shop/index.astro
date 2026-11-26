@@ -3,11 +3,11 @@ import Base from '../../layouts/Base.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import { products, categories } from '../../data/products';
 ---
-<Base title="Shop" description="Concrete objects for the home, made in small batches in Madrid.">
+<Base title="Tienda" description="Objetos de hormigón para el hogar, hechos en series pequeñas en Madrid.">
   <div class="wrap shop">
     <aside>
-      <h1>Shop</h1>
-      <nav aria-label="Categories">
+      <h1>Tienda</h1>
+      <nav aria-label="Categorías">
         <ul>
           {categories.map((c) => (
             <li><a href={`#${c.slug}`} class:list={{ off: !c.available }}>{c.name}</a></li>
@@ -22,12 +22,12 @@ import { products, categories } from '../../data/products';
           <section id={c.slug} class="cat">
             <header>
               <h2>{c.name}</h2>
-              <span class="muted">{items.length ? `${items.length} ${items.length === 1 ? 'object' : 'objects'}` : 'In development'}</span>
+              <span class="muted">{items.length ? `${items.length} ${items.length === 1 ? 'objeto' : 'objetos'}` : 'En desarrollo'}</span>
             </header>
             {items.length ? (
               <div class="grid">{items.map((p) => <ProductCard product={p} />)}</div>
             ) : (
-              <p class="muted empty">Nothing here yet. New objects are announced on Instagram first.</p>
+              <p class="muted empty">Todavía no hay nada. Los objetos nuevos se anuncian primero en Instagram.</p>
             )}
           </section>
         );

@@ -12,16 +12,16 @@ const cat = categories.find((c) => c.slug === p.category);
 ---
 <Base title={p.name} description={p.summary}>
   <div class="wrap">
-    <nav class="crumbs muted" aria-label="Breadcrumb">
-      <a href="/shop">Shop</a> / <a href={`/shop#${p.category}`}>{cat?.name}</a> / <span aria-current="page">{p.name}</span>
+    <nav class="crumbs muted" aria-label="Ruta de navegación">
+      <a href="/shop">Tienda</a> / <a href={`/shop#${p.category}`}>{cat?.name}</a> / <span aria-current="page">{p.name}</span>
     </nav>
     <div class="product">
       <div class="gallery">
         {p.images.length
-          ? p.images.map((src, i) => <img src={src} alt={`${p.name}, view ${i + 1}`} />)
+          ? p.images.map((src, i) => <img src={src} alt={`${p.name}, vista ${i + 1}`} />)
           : <>
-              <Placeholder label="Photo to come" />
-              <Placeholder label="Photo to come" tone="basalt" />
+              <Placeholder label="Foto próximamente" />
+              <Placeholder label="Foto próximamente" tone="basalt" />
             </>}
       </div>
       <div class="info">
@@ -29,25 +29,25 @@ const cat = categories.find((c) => c.slug === p.category);
         <p class="muted">{p.material}</p>
         <p class="price">{formatPrice(p.price)}</p>
         <p>{p.summary}</p>
-        <p class="finishes"><span class="muted">Finishes</span> {p.finishes.join(', ')}</p>
+        <p class="finishes"><span class="muted">Acabados</span> {p.finishes.join(', ')}</p>
         <BuyButton product={p} />
         <dl>
           <div><dt>Material</dt><dd>{p.material}</dd></div>
-          <div><dt>Dimensions</dt><dd>{p.dimensions}</dd></div>
-          {p.weight && <div><dt>Weight</dt><dd>{p.weight}</dd></div>}
-          <div><dt>Made in</dt><dd>Madrid, by hand</dd></div>
+          <div><dt>Dimensiones</dt><dd>{p.dimensions}</dd></div>
+          {p.weight && <div><dt>Peso</dt><dd>{p.weight}</dd></div>}
+          <div><dt>Hecho en</dt><dd>Madrid, a mano</dd></div>
         </dl>
         <details open>
-          <summary>About the object</summary>
+          <summary>Sobre el objeto</summary>
           {p.description.map((d) => <p>{d}</p>)}
         </details>
         <details>
-          <summary>Care</summary>
+          <summary>Cuidado</summary>
           <p>{p.care}</p>
         </details>
         <details>
-          <summary>Shipping and returns</summary>
-          <p>Ships from Madrid. Delivery times and costs are shown at checkout. You can return an unused piece within 14 days of delivery.</p>
+          <summary>Envíos y devoluciones</summary>
+          <p>Salimos desde Madrid. Los plazos y costes de envío se muestran al pagar. Puedes devolver una pieza sin usar en los 14 días siguientes a la entrega.</p>
         </details>
       </div>
     </div>

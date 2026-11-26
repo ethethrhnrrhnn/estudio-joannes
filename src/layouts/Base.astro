@@ -5,13 +5,13 @@ import Footer from '../components/Footer.astro';
 interface Props { title?: string; description?: string; darkHeader?: boolean }
 const {
   title,
-  description = 'Objects in concrete, made by hand in Madrid.',
+  description = 'Objetos de hormigón, hechos a mano en Madrid.',
   darkHeader = false,
 } = Astro.props;
 const full = title ? `${title} | Estudio Joannes` : 'Estudio Joannes';
 ---
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,7 +25,7 @@ const full = title ? `${title} | Estudio Joannes` : 'Estudio Joannes';
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Geist+Mono&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <p class="announce">Designed and made by hand in Madrid</p>
+    <p class="announce">Diseñado y hecho a mano en Madrid</p>
     <Header dark={darkHeader} />
     <main><slot /></main>
     <Footer />

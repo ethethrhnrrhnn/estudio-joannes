@@ -6,19 +6,19 @@ import { site } from '../data/shop';
 import { products, categories, formatPrice } from '../data/products';
 const first = products[0];
 const steps = [
-  { t: 'Master', d: 'The form is modelled in CAD and 3D printed as a master.' },
-  { t: 'Mould', d: 'Silicone is poured around the master, inside a printed mould box.' },
-  { t: 'Cast', d: 'Concrete is mixed, poured and vibrated to bring the air out.' },
-  { t: 'Cure', d: 'Each piece cures slowly, then is demoulded, sanded and sealed.' },
+  { t: 'Matriz', d: 'La forma se modela en CAD y se imprime en 3D como matriz.' },
+  { t: 'Molde', d: 'Se vierte silicona alrededor de la matriz, dentro de una caja de molde impresa.' },
+  { t: 'Colado', d: 'Se mezcla el hormigón, se vierte y se vibra para sacar el aire.' },
+  { t: 'Curado', d: 'Cada pieza cura despacio; después se desmolda, se lija y se sella.' },
 ];
 ---
 <Base darkHeader>
   <section class="hero">
     <div class="wrap hero-inner">
-      <h1>Objects in concrete,<br />made by hand in Madrid.</h1>
-      <p class="hero-sub">Designed and made by the studio, in small batches.</p>
+      <h1>Objetos de hormigón,<br />hechos a mano en Madrid.</h1>
+      <p class="hero-sub">Diseñados y hechos por el estudio, en series pequeñas.</p>
       <div class="hero-actions">
-        <a class="btn on-dark" href="/shop">Shop now</a>
+        <a class="btn on-dark" href="/shop">Comprar</a>
       </div>
     </div>
     <div class="hero-media" aria-hidden="true">
@@ -31,29 +31,29 @@ const steps = [
       {first.images[0] ? <img src={first.images[0]} alt={first.name} /> : <Placeholder />}
     </a>
     <div class="feature-text">
-      <p class="muted">The first object</p>
+      <p class="muted">El primer objeto</p>
       <h2>{first.name}</h2>
       <p>{first.summary}</p>
       <p class="price">{formatPrice(first.price)}</p>
-      <a class="btn" href={`/shop/${first.slug}`}>See the ashtray</a>
+      <a class="btn" href={`/shop/${first.slug}`}>Ver el cenicero</a>
     </div>
   </section>
 
   <section class="statement wrap">
-    <p class="eyebrow muted">Drawn, prototyped and tested</p>
-    <h2>Concrete for everyday rituals</h2>
-    <p class="muted">Home objects the way an industrial designer would make them, then cast by hand in small batches.</p>
+    <p class="eyebrow muted">Dibujado, prototipado y probado</p>
+    <h2>Hormigón para los rituales de cada día</h2>
+    <p class="muted">Objetos para el hogar hechos como los haría un diseñador industrial y luego moldeados a mano en series pequeñas.</p>
   </section>
 
-  <section class="grid wrap" aria-label="Objects">
+  <section class="grid wrap" aria-label="Objetos">
     <ul>
       {products.map((p) => <li><ProductCard product={p} /></li>)}
     </ul>
-    <a class="u all" href="/shop">View all objects</a>
+    <a class="u all" href="/shop">Ver todos los objetos</a>
   </section>
 
   <section class="process wrap" aria-labelledby="proc-h">
-    <h2 id="proc-h">How each piece is made</h2>
+    <h2 id="proc-h">Cómo se hace cada pieza</h2>
     <ol>
       {steps.map((s, i) => (
         <li><span class="n">{i + 1}</span><h3>{s.t}</h3><p class="muted">{s.d}</p></li>
@@ -62,14 +62,14 @@ const steps = [
   </section>
 
   <section class="hello wrap" aria-labelledby="hello-h">
-    <h2 id="hello-h">Hello, what's up?</h2>
+    <h2 id="hello-h">Hola, ¿qué tal?</h2>
     <form id="hello-form" action="mailto:">
-      <label>Name<input name="name" autocomplete="name" /></label>
-      <label>Email<input name="email" type="email" autocomplete="email" required /></label>
-      <label class="full">Message<textarea name="message" rows="5" required></textarea></label>
-      <button class="btn" type="submit">Send</button>
+      <label>Nombre<input name="name" autocomplete="name" /></label>
+      <label>Correo electrónico<input name="email" type="email" autocomplete="email" required /></label>
+      <label class="full">Mensaje<textarea name="message" rows="5" required></textarea></label>
+      <button class="btn" type="submit">Enviar</button>
     </form>
-    <p class="muted note">Opens your email app with the message ready to send. Or write to <a class="u" href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    <p class="muted note">Se abre tu app de correo con el mensaje listo para enviar. O escribe a <a class="u" href={`mailto:${site.email}`}>{site.email}</a>.</p>
   </section>
 </Base>
 
@@ -150,6 +150,6 @@ const steps = [
     e.preventDefault();
     const f = new FormData(e.target);
     const body = `${f.get('message')}\n\n${f.get('name') || ''}\n${f.get('email')}`;
-    location.href = `mailto:${to}?subject=${encodeURIComponent('Message from the website')}&body=${encodeURIComponent(body)}`;
+    location.href = `mailto:${to}?subject=${encodeURIComponent('Mensaje desde la web')}&body=${encodeURIComponent(body)}`;
   });
 </script>

@@ -22,45 +22,45 @@ export type Product = {
 };
 
 export const categories = [
-  { slug: 'ashtrays', name: 'Ashtrays', available: true },
-  { slug: 'lamps', name: 'Lamps', available: true },
-  { slug: 'trays', name: 'Trays', available: false },
-  { slug: 'planters', name: 'Planters', available: false },
-  { slug: 'candle-holders', name: 'Candle holders', available: false },
+  { slug: 'ashtrays', name: 'Ceniceros', available: true },
+  { slug: 'lamps', name: 'Lámparas', available: true },
+  { slug: 'trays', name: 'Bandejas', available: false },
+  { slug: 'planters', name: 'Macetas', available: false },
+  { slug: 'candle-holders', name: 'Portavelas', available: false },
 ];
 
 export const products: Product[] = [
   {
     slug: 'volcanic-ashtray',
-    name: 'Volcanic ashtray',
+    name: 'Cenicero volcánico',
     category: 'ashtrays',
     price: 34,
-    material: 'Cast concrete',
+    material: 'Hormigón moldeado',
     dimensions: 'Ø 000 × 00 mm', // TODO: real dimensions
-    finishes: ['Basalt', 'Ash'],
-    summary: 'A crater in solid concrete. Each one is cast by hand in Madrid.',
+    finishes: ['Basalto', 'Ceniza'],
+    summary: 'Un cráter en hormigón macizo. Cada uno se moldea a mano en Madrid.',
     description: [
-      'The form comes from a volcanic cone: a heavy base that rises to a crater.',
-      'It is cast in concrete from a silicone mould, so every piece carries its own pores, air bubbles and tone.',
+      'La forma parte de un cono volcánico: una base pesada que se eleva hasta un cráter.',
+      'Se cuela en hormigón con un molde de silicona, así que cada pieza tiene sus propios poros, burbujas de aire y tono.',
     ],
-    care: 'Wipe with a damp cloth. The concrete is sealed but will patina with use.',
+    care: 'Límpialo con un paño húmedo. El hormigón está sellado, pero irá cogiendo pátina con el uso.',
     shopifyId: null,
     images: ['/images/ashtray-1.webp'],
   },
   {
     slug: 'twist-lamp', // TODO: confirm the name
-    name: 'Twist lamp',
+    name: 'Lámpara Twist',
     category: 'lamps',
     price: 67,
-    material: '3D printed', // TODO: confirm material
+    material: 'Impresa en 3D', // TODO: confirm material
     dimensions: 'Ø 000 × 000 mm', // TODO: real dimensions
-    finishes: ['White'], // TODO: confirm finishes
-    summary: 'A table lamp in a single twisting form. The light glows through the printed walls.',
+    finishes: ['Blanco'], // TODO: confirm finishes
+    summary: 'Una lámpara de mesa de una sola forma retorcida. La luz se filtra por las paredes impresas.',
     description: [
-      'The shell twists as it rises, so the light and shadow change as you walk around it.',
-      'It is printed layer by layer, and the fine ridges of the print are part of the surface.',
+      'La carcasa se retuerce al subir, así que la luz y la sombra cambian al caminar a su alrededor.',
+      'Se imprime capa a capa, y las finas estrías de la impresión forman parte de la superficie.',
     ],
-    care: 'Wipe with a dry or slightly damp cloth. Keep away from direct heat.',
+    care: 'Límpiala con un paño seco o ligeramente húmedo. Mantenla alejada del calor directo.',
     shopifyId: null,
     images: ['/images/twist-lamp-1.jpg'],
   },
@@ -68,5 +68,5 @@ export const products: Product[] = [
 
 export const formatPrice = (p: number | null) =>
   p === null
-    ? 'Coming soon'
+    ? 'Próximamente'
     : new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(p);

@@ -9,8 +9,8 @@ const live = shopReady() && product.shopifyId;
   <div class="buy" data-buy data-id={product.shopifyId} data-domain={shopify.domain} data-token={shopify.storefrontAccessToken}></div>
 ) : (
   <div class="buy-soon">
-    <button class="btn" disabled>Not yet on sale</button>
-    <p class="muted">The first batch is curing. <a class="u" href={site.instagram} rel="noopener">Follow on Instagram</a> or <a class="u" href={`mailto:${site.email}?subject=${encodeURIComponent(product.name)}`}>email to reserve one</a>.</p>
+    <button class="btn" disabled>Aún no está a la venta</button>
+    <p class="muted">La primera tanda se está curando. <a class="u" href={site.instagram} rel="noopener">Síguenos en Instagram</a> o <a class="u" href={`mailto:${site.email}?subject=${encodeURIComponent(product.name)}`}>escríbenos para reservar uno</a>.</p>
   </div>
 )}
 
@@ -36,10 +36,10 @@ const live = shopReady() && product.shopifyId;
             options: {
               product: {
                 contents: { img: false, title: false, price: true, options: true },
-                text: { button: 'Add to bag' },
+                text: { button: 'Añadir a la bolsa' },
                 styles: { product: { 'text-align': 'left', ...font }, button, price: { ...font, 'font-size': '20px' } },
               },
-              cart: { text: { title: 'Bag', total: 'Total', button: 'Checkout' }, styles: { button, ...{} } },
+              cart: { text: { title: 'Bolsa', total: 'Total', button: 'Finalizar compra' }, styles: { button, ...{} } },
               toggle: { styles: { toggle: { ...font, 'background-color': '#1a1a1a', ':hover': { 'background-color': '#000' } } } },
             },
           });

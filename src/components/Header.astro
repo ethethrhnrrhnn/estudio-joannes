@@ -4,15 +4,15 @@ interface Props { dark?: boolean }
 const { dark = false } = Astro.props;
 const path = Astro.url.pathname;
 const links = [
-  { href: '/shop', label: 'Shop' },
-  { href: '/studio', label: 'Studio' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/shop', label: 'Tienda' },
+  { href: '/studio', label: 'Estudio' },
+  { href: '/contact', label: 'Contacto' },
 ];
 ---
 <header class:list={['site-header', { dark }]}>
   <div class="wrap bar">
-    <a href="/" aria-label="Estudio Joannes, home"><Logo size={26} /></a>
-    <nav aria-label="Main">
+    <a href="/" aria-label="Estudio Joannes, inicio"><Logo size={26} /></a>
+    <nav aria-label="Principal">
       {links.map((l) => (
         <a href={l.href} aria-current={path.startsWith(l.href) ? 'page' : undefined}>{l.label}</a>
       ))}
