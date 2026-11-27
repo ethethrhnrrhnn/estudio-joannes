@@ -65,7 +65,7 @@ export const products: Product[] = [
     care: 'Límpiala con un paño seco o ligeramente húmedo. Mantenla alejada del calor directo.',
     shopifyId: null,
     paymentLink: null,
-    images: ['/images/twist-lamp-1.jpg', '/images/twist-lamp-2.jpg', '/images/twist-lamp-3.jpg', '/images/twist-lamp-4.jpg', '/images/twist-lamp-5.jpg'],
+    images: ['/images/twist-lamp-1.jpg', '/images/twist-lamp-3.jpg', '/images/twist-lamp-4.jpg', '/images/twist-lamp-5.jpg'],
   },
 ];
 
