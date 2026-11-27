@@ -9,13 +9,15 @@ export function getStaticPaths() {
 }
 const { product: p } = Astro.props;
 const cat = categories.find((c) => c.slug === p.category);
+const rich = p.images.length > 1; // multi-photo products get the marketplace-style layout
+const others = products.filter((o) => o.slug !== p.slug);
 ---
 <Base title={p.name} description={p.summary}>
   <div class="wrap">
     <nav class="crumbs muted" aria-label="Ruta de navegación">
       <a href="/shop">Tienda</a> / <a href={`/shop#${p.category}`}>{cat?.name}</a> / <span aria-current="page">{p.name}</span>
     </nav>
-    <div class="product">
+    <div class:list={['product', { rich }]}>
       <div class="gallery">
         {p.images.length
           ? p.images.map((src, i) => <img src={src} alt={`${p.name}, vista ${i + 1}`} />)
@@ -27,10 +29,17 @@ const cat = categories.find((c) => c.slug === p.category);
       <div class="info">
         <h1>{p.name}</h1>
         <p class="muted">{p.material}</p>
-        <p class="price">{formatPrice(p.price)}</p>
+        <p class="price">{formatPrice(p.price)}{p.price !== null && <small class="muted"> IVA incluido</small>}</p>
         <p>{p.summary}</p>
         <p class="finishes"><span class="muted">Acabados</span> {p.finishes.join(', ')}</p>
         <BuyButton product={p} />
+        {rich && (
+          <ul class="perks">
+            <li><strong>Hecho a mano en Madrid</strong><span class="muted">Cada pieza se produce en una tanda pequeña.</span></li>
+            <li><strong>Envío desde Madrid</strong><span class="muted">Plazo y coste se muestran al pagar.</span></li>
+            <li><strong>Puedes cambiar de opinión</strong><span class="muted">14 días para devolver una pieza sin usar.</span></li>
+          </ul>
+        )}
         <dl>
           <div><dt>Material</dt><dd>{p.material}</dd></div>
           <div><dt>Dimensiones</dt><dd>{p.dimensions}</dd></div>
@@ -51,6 +60,21 @@ const cat = categories.find((c) => c.slug === p.category);
         </details>
       </div>
     </div>
+    {rich && others.length > 0 && (
+      <section class="more">
+        <h2>Complétalo con</h2>
+        <div class="more-grid">
+          {others.map((o) => (
+            <a class="mini" href={`/shop/${o.slug}`}>
+              {o.images[0] && <img src={o.images[0]} alt={o.name} loading="lazy" />}
+              <span class="name">{o.name}</span>
+              <span class="muted">{o.material}</span>
+              <span>{formatPrice(o.price)}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
   </div>
 </Base>
 
@@ -76,6 +100,23 @@ const cat = categories.find((c) => c.slug === p.category);
   summary::after { content: '+'; font-weight: 400; }
   details[open] summary::after { content: '–'; }
   details p { font-size: var(--t-s); }
+  .price small { font-size: var(--t-s); font-weight: 400; }
+  .rich { grid-template-columns: 2fr 1fr; }
+  .rich .gallery { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .rich .gallery img { aspect-ratio: 1 / 1; }
+  .rich .gallery img:first-child { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+  .rich .gallery img:last-child:nth-child(even) { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+  .rich h1 { font-size: var(--t-l); font-weight: 500; }
+  .rich .price { font-size: var(--t-xl); margin: 16px 0; }
+  .perks { list-style: none; margin: 28px 0 0; padding: 0; border-top: 1px solid var(--line); }
+  .perks li { display: grid; gap: 2px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: var(--t-s); }
+  .more { margin-top: clamp(56px, 9vw, 120px); padding-bottom: 48px; }
+  .more h2 { font-size: var(--t-l); margin-bottom: 20px; }
+  .more-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 260px)); gap: 20px; }
+  .mini { display: grid; gap: 2px; font-size: var(--t-s); }
+  .mini img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: 10px; }
+  .mini .name { font-weight: 500; }
+  .mini:hover .name { text-decoration: underline; text-underline-offset: 0.2em; }
   @media (max-width: 820px) {
     .product { grid-template-columns: 1fr; }
     .info { position: static; }

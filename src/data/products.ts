@@ -18,6 +18,7 @@ export type Product = {
   description: string[];
   care: string;
   shopifyId: string | null;
+  paymentLink: string | null; // Stripe Payment Link URL (https://buy.stripe.com/...), null until created
   images: string[];
 };
 
@@ -45,6 +46,7 @@ export const products: Product[] = [
     ],
     care: 'Límpialo con un paño húmedo. El hormigón está sellado, pero irá cogiendo pátina con el uso.',
     shopifyId: null,
+    paymentLink: null,
     images: ['/images/hero-1.jpg'],
   },
   {
@@ -62,7 +64,8 @@ export const products: Product[] = [
     ],
     care: 'Límpiala con un paño seco o ligeramente húmedo. Mantenla alejada del calor directo.',
     shopifyId: null,
-    images: ['/images/hero-2.jpg'],
+    paymentLink: null,
+    images: ['/images/twist-lamp-1.jpg', '/images/twist-lamp-2.jpg', '/images/twist-lamp-3.jpg', '/images/twist-lamp-4.jpg', '/images/twist-lamp-5.jpg'],
   },
 ];
 

@@ -5,7 +5,9 @@ interface Props { product: Product }
 const { product } = Astro.props;
 const live = shopReady() && product.shopifyId;
 ---
-{live ? (
+{product.paymentLink ? (
+  <a class="btn" href={product.paymentLink} rel="noopener">Comprar · pago seguro con Stripe</a>
+) : live ? (
   <div class="buy" data-buy data-id={product.shopifyId} data-domain={shopify.domain} data-token={shopify.storefrontAccessToken}></div>
 ) : (
   <div class="buy-soon">
